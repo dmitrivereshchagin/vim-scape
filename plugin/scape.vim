@@ -6,7 +6,8 @@ if exists('g:loaded_scape') || &compatible
 endif
 let g:loaded_scape = 1
 
-map  <F1> <Esc>
-map! <F1> <Esc>
-cmap <F1> <C-C>
-smap <F1> <Esc>
+cnoremap <expr> <unique> <F1> &cpoptions =~# 'x' ? '<Esc>' : '<C-C>'
+
+for s:mode in ['i', 'n', 'o', 's', 'x']
+  execute s:mode . 'noremap <unique> <F1> <Esc>'
+endfor
